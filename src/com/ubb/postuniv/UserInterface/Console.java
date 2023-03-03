@@ -1,6 +1,7 @@
 package com.ubb.postuniv.UserInterface;
 
 import com.ubb.postuniv.Domain.Part;
+import com.ubb.postuniv.Domain.PartProfitabilityDTO;
 import com.ubb.postuniv.Service.PartService;
 
 import java.awt.*;
@@ -19,6 +20,8 @@ public class Console {
     private void showMenu() {
         System.out.println("1. Add a part");
         System.out.println("2. Show parts");
+        System.out.println("3. Show profitability report");
+
         System.out.println("0. Exit");
         System.out.println("Enter your option: ");
     }
@@ -53,6 +56,13 @@ public class Console {
         }
     }
 
+    private void handleProfitabilityReport() {
+        for (PartProfitabilityDTO p:
+                this.partService.getPartsSortedByProfitability()) {
+            System.out.println(p);
+        }
+    }
+
     public void runConsole() {
         while (true) {
             this.showMenu();
@@ -63,6 +73,9 @@ public class Console {
                     break;
                 case 2:
                     this.handleShowAll();
+                    break;
+                case 3:
+                    this.handleProfitabilityReport();
                     break;
                 case 0:
                     return;
