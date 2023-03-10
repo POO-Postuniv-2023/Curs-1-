@@ -2,9 +2,11 @@ package com.ubb.postuniv.UserInterface;
 
 import com.ubb.postuniv.Domain.Part;
 import com.ubb.postuniv.Domain.PartProfitabilityDTO;
+import com.ubb.postuniv.Domain.TypeAveragePriceDTO;
 import com.ubb.postuniv.Service.PartService;
 
 import java.awt.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console {
@@ -21,6 +23,7 @@ public class Console {
         System.out.println("1. Add a part");
         System.out.println("2. Show parts");
         System.out.println("3. Show profitability report");
+        System.out.println("4. Show average prices for types");
 
         System.out.println("0. Exit");
         System.out.println("Enter your option: ");
@@ -44,6 +47,9 @@ public class Console {
             String type = scanner.next();
 
             this.partService.add(id, name, price, stock, type);
+        } catch (InputMismatchException ime) {
+            System.out.println("Wrong data type entered.");
+            scanner.next();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -63,6 +69,12 @@ public class Console {
         }
     }
 
+    private void handleShowTypesPrices() {
+        for (TypeAveragePriceDTO tap : this.partService.getTypesWithAveragePrices()) {
+            System.out.println(tap);
+        }
+    }
+
     public void runConsole() {
         while (true) {
             this.showMenu();
@@ -76,6 +88,9 @@ public class Console {
                     break;
                 case 3:
                     this.handleProfitabilityReport();
+                    break;
+                case 4:
+                    this.handleShowTypesPrices();
                     break;
                 case 0:
                     return;
