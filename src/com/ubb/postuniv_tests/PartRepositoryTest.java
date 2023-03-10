@@ -44,12 +44,13 @@ class PartRepositoryTest {
         partRepository.create(p1);
         partRepository.create(p2);
 
-        try {
-            partRepository.create(p3);
-            Assertions.fail("Exception not raised in repository for duplicate id");
-        } catch (Exception ex) {
-
-        }
+        Assertions.assertThrows(Exception.class, () -> partRepository.create(p3));
+//        try {
+//            partRepository.create(p3);
+//            Assertions.fail("Exception not raised in repository for duplicate id");
+//        } catch (Exception ex) {
+//
+//        }
     }
 
     @org.junit.jupiter.api.Test
