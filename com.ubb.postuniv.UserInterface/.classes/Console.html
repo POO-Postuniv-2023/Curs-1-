@@ -1,0 +1,185 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Console</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ubb.postuniv.UserInterface</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Console (com.ubb.postuniv.UserInterface)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Console</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 55)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ubb.postuniv.UserInterface;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.ubb.postuniv.Domain.Part;
+<i>4</i>&nbsp;import com.ubb.postuniv.Domain.PartProfitabilityDTO;
+<i>5</i>&nbsp;import com.ubb.postuniv.Domain.TypeAveragePriceDTO;
+<i>6</i>&nbsp;import com.ubb.postuniv.Service.PartService;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.awt.*;
+<i>9</i>&nbsp;import java.util.InputMismatchException;
+<i>10</i>&nbsp;import java.util.Scanner;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;public class Console {
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    private PartService partService;
+<i>15</i>&nbsp;    private Scanner scanner;
+<i>16</i>&nbsp;
+<b class="nc"><i>17</i>&nbsp;    public Console(PartService partService) {</b>
+<b class="nc"><i>18</i>&nbsp;        this.partService = partService;</b>
+<b class="nc"><i>19</i>&nbsp;        this.scanner = new Scanner(System.in);</b>
+<b class="nc"><i>20</i>&nbsp;    }</b>
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    private void showMenu() {
+<b class="nc"><i>23</i>&nbsp;        System.out.println(&quot;1. Add a part&quot;);</b>
+<b class="nc"><i>24</i>&nbsp;        System.out.println(&quot;2. Show parts&quot;);</b>
+<b class="nc"><i>25</i>&nbsp;        System.out.println(&quot;3. Show profitability report&quot;);</b>
+<b class="nc"><i>26</i>&nbsp;        System.out.println(&quot;4. Show average prices for types&quot;);</b>
+<i>27</i>&nbsp;
+<b class="nc"><i>28</i>&nbsp;        System.out.println(&quot;0. Exit&quot;);</b>
+<b class="nc"><i>29</i>&nbsp;        System.out.println(&quot;Enter your option: &quot;);</b>
+<b class="nc"><i>30</i>&nbsp;    }</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    private void handleAddPart() {
+<i>33</i>&nbsp;        try {
+<b class="nc"><i>34</i>&nbsp;            System.out.print(&quot;Enter the id: &quot;);</b>
+<b class="nc"><i>35</i>&nbsp;            int id = scanner.nextInt();</b>
+<i>36</i>&nbsp;
+<b class="nc"><i>37</i>&nbsp;            System.out.print(&quot;Enter the name: &quot;);</b>
+<b class="nc"><i>38</i>&nbsp;            String name = scanner.next();</b>
+<i>39</i>&nbsp;
+<b class="nc"><i>40</i>&nbsp;            System.out.print(&quot;Enter the price: &quot;);</b>
+<b class="nc"><i>41</i>&nbsp;            float price = scanner.nextFloat();</b>
+<i>42</i>&nbsp;
+<b class="nc"><i>43</i>&nbsp;            System.out.print(&quot;Enter the stock: &quot;);</b>
+<b class="nc"><i>44</i>&nbsp;            int stock = scanner.nextInt();</b>
+<i>45</i>&nbsp;
+<b class="nc"><i>46</i>&nbsp;            System.out.print(&quot;Enter the type: &quot;);</b>
+<b class="nc"><i>47</i>&nbsp;            String type = scanner.next();</b>
+<i>48</i>&nbsp;
+<b class="nc"><i>49</i>&nbsp;            this.partService.add(id, name, price, stock, type);</b>
+<b class="nc"><i>50</i>&nbsp;        } catch (InputMismatchException ime) {</b>
+<b class="nc"><i>51</i>&nbsp;            System.out.println(&quot;Wrong data type entered.&quot;);</b>
+<b class="nc"><i>52</i>&nbsp;            scanner.next();</b>
+<b class="nc"><i>53</i>&nbsp;        } catch (Exception ex) {</b>
+<b class="nc"><i>54</i>&nbsp;            System.out.println(ex.getMessage());</b>
+<b class="nc"><i>55</i>&nbsp;        }</b>
+<b class="nc"><i>56</i>&nbsp;    }</b>
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    private void handleShowAll() {
+<i>59</i>&nbsp;        for (Part p:
+<b class="nc"><i>60</i>&nbsp;             this.partService.getAll()) {</b>
+<b class="nc"><i>61</i>&nbsp;            System.out.println(p);</b>
+<b class="nc"><i>62</i>&nbsp;        }</b>
+<b class="nc"><i>63</i>&nbsp;    }</b>
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    private void handleProfitabilityReport() {
+<i>66</i>&nbsp;        for (PartProfitabilityDTO p:
+<b class="nc"><i>67</i>&nbsp;                this.partService.getPartsSortedByProfitability()) {</b>
+<b class="nc"><i>68</i>&nbsp;            System.out.println(p);</b>
+<b class="nc"><i>69</i>&nbsp;        }</b>
+<b class="nc"><i>70</i>&nbsp;    }</b>
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    private void handleShowTypesPrices() {
+<b class="nc"><i>73</i>&nbsp;        for (TypeAveragePriceDTO tap : this.partService.getTypesWithAveragePrices()) {</b>
+<b class="nc"><i>74</i>&nbsp;            System.out.println(tap);</b>
+<b class="nc"><i>75</i>&nbsp;        }</b>
+<b class="nc"><i>76</i>&nbsp;    }</b>
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    public void runConsole() {
+<i>79</i>&nbsp;        while (true) {
+<b class="nc"><i>80</i>&nbsp;            this.showMenu();</b>
+<b class="nc"><i>81</i>&nbsp;            int option = this.scanner.nextInt();</b>
+<b class="nc"><i>82</i>&nbsp;            switch (option) {</b>
+<i>83</i>&nbsp;                case 1:
+<b class="nc"><i>84</i>&nbsp;                    this.handleAddPart();</b>
+<b class="nc"><i>85</i>&nbsp;                    break;</b>
+<i>86</i>&nbsp;                case 2:
+<b class="nc"><i>87</i>&nbsp;                    this.handleShowAll();</b>
+<b class="nc"><i>88</i>&nbsp;                    break;</b>
+<i>89</i>&nbsp;                case 3:
+<b class="nc"><i>90</i>&nbsp;                    this.handleProfitabilityReport();</b>
+<b class="nc"><i>91</i>&nbsp;                    break;</b>
+<i>92</i>&nbsp;                case 4:
+<b class="nc"><i>93</i>&nbsp;                    this.handleShowTypesPrices();</b>
+<b class="nc"><i>94</i>&nbsp;                    break;</b>
+<i>95</i>&nbsp;                case 0:
+<b class="nc"><i>96</i>&nbsp;                    return;</b>
+<i>97</i>&nbsp;                default:
+<b class="nc"><i>98</i>&nbsp;                    System.out.println(&quot;Unsupported command.&quot;);</b>
+<i>99</i>&nbsp;            }
+<b class="nc"><i>100</i>&nbsp;        }</b>
+<i>101</i>&nbsp;    }
+<i>102</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-03-10 19:38</div>
+</div>
+</body>
+</html>

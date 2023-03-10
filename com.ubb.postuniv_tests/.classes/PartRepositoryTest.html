@@ -1,0 +1,145 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PartRepositoryTest</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ubb.postuniv_tests</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PartRepositoryTest (com.ubb.postuniv_tests)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PartRepositoryTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.6%
+  </span>
+  <span class="absValue">
+    (25/ 27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ubb.postuniv_tests;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.ubb.postuniv.Domain.Part;
+<i>4</i>&nbsp;import com.ubb.postuniv.Repository.PartRepository;
+<i>5</i>&nbsp;import org.junit.jupiter.api.Assertions;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import java.util.List;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import static org.junit.jupiter.api.Assertions.*;
+<i>10</i>&nbsp;
+<b class="fc"><i>11</i>&nbsp;class PartRepositoryTest {</b>
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    @org.junit.jupiter.api.Test
+<i>14</i>&nbsp;    void validAdds_should_saveToRepository() throws Exception {
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;        // AAA - Arrange, Act, Assert
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;        // Arrange
+<b class="fc"><i>19</i>&nbsp;        PartRepository partRepository = new PartRepository();</b>
+<b class="fc"><i>20</i>&nbsp;        Part p1 = new Part(1, &quot;p1&quot;, 100, 10, &quot;SH&quot;);</b>
+<b class="fc"><i>21</i>&nbsp;        Part p2 = new Part(2, &quot;p2&quot;, 120, 12, &quot;SH&quot;);</b>
+<b class="fc"><i>22</i>&nbsp;        Part p3 = new Part(3, &quot;p3&quot;, 100, 16, &quot;AM&quot;);</b>
+<b class="fc"><i>23</i>&nbsp;        Part p4 = new Part(4, &quot;p1&quot;, 170, 10, &quot;OEM&quot;);</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;        // Act
+<b class="fc"><i>26</i>&nbsp;        partRepository.create(p1);</b>
+<b class="fc"><i>27</i>&nbsp;        partRepository.create(p2);</b>
+<b class="fc"><i>28</i>&nbsp;        partRepository.create(p3);</b>
+<b class="fc"><i>29</i>&nbsp;        partRepository.create(p4);</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;        // Assert
+<b class="fc"><i>32</i>&nbsp;        List&lt;Part&gt; allParts = partRepository.readAll();</b>
+<b class="fc"><i>33</i>&nbsp;        Assertions.assertEquals(4, allParts.size());</b>
+<b class="fc"><i>34</i>&nbsp;        Assertions.assertNotNull(partRepository.readOne(1));</b>
+<b class="fc"><i>35</i>&nbsp;    }</b>
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    @org.junit.jupiter.api.Test
+<i>38</i>&nbsp;    void addsWithDuplicateId_should_raiseExceptionInRepository() throws Exception {
+<b class="fc"><i>39</i>&nbsp;        PartRepository partRepository = new PartRepository();</b>
+<b class="fc"><i>40</i>&nbsp;        Part p1 = new Part(1, &quot;p1&quot;, 100, 10, &quot;SH&quot;);</b>
+<b class="fc"><i>41</i>&nbsp;        Part p2 = new Part(2, &quot;p2&quot;, 120, 12, &quot;SH&quot;);</b>
+<b class="fc"><i>42</i>&nbsp;        Part p3 = new Part(1, &quot;p3&quot;, 100, 16, &quot;AM&quot;);</b>
+<i>43</i>&nbsp;
+<b class="fc"><i>44</i>&nbsp;        partRepository.create(p1);</b>
+<b class="fc"><i>45</i>&nbsp;        partRepository.create(p2);</b>
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;        try {
+<b class="fc"><i>48</i>&nbsp;            partRepository.create(p3);</b>
+<b class="nc"><i>49</i>&nbsp;            Assertions.fail(&quot;Exception not raised in repository for duplicate id&quot;);</b>
+<b class="fc"><i>50</i>&nbsp;        } catch (Exception ex) {</b>
+<i>51</i>&nbsp;
+<b class="nc"><i>52</i>&nbsp;        }</b>
+<b class="fc"><i>53</i>&nbsp;    }</b>
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    @org.junit.jupiter.api.Test
+<i>56</i>&nbsp;    void getTypesWithAveragePrices() {
+<b class="fc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    @org.junit.jupiter.api.Test
+<i>60</i>&nbsp;    void getAll() {
+<b class="fc"><i>61</i>&nbsp;    }</b>
+<i>62</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-03-10 19:38</div>
+</div>
+</body>
+</html>

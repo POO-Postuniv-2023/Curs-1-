@@ -1,0 +1,138 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PartRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.ubb.postuniv.Repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PartRepository (com.ubb.postuniv.Repository)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PartRepository</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.9%
+  </span>
+  <span class="absValue">
+    (9/ 17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.ubb.postuniv.Repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.ubb.postuniv.Domain.Part;
+<i>4</i>&nbsp;import org.xml.sax.helpers.AttributeListImpl;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.ArrayList;
+<i>7</i>&nbsp;import java.util.HashMap;
+<i>8</i>&nbsp;import java.util.List;
+<i>9</i>&nbsp;import java.util.Map;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;public class PartRepository {
+<b class="fc"><i>12</i>&nbsp;    private Map&lt;Integer, Part&gt; storage = new HashMap&lt;&gt;();</b>
+<i>13</i>&nbsp;
+<b class="fc"><i>14</i>&nbsp;    public PartRepository() {</b>
+<i>15</i>&nbsp;
+<b class="fc"><i>16</i>&nbsp;    }</b>
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    /**
+<i>19</i>&nbsp;     * Add a Part object to the repository.
+<i>20</i>&nbsp;     * @param part the Part object to add, the ID must be unique.
+<i>21</i>&nbsp;     * @throws Exception if the ID exists.
+<i>22</i>&nbsp;     */
+<i>23</i>&nbsp;    public void create(Part part) throws Exception {
+<b class="fc"><i>24</i>&nbsp;        if (this.storage.containsKey(part.getId())) {</b>
+<b class="fc"><i>25</i>&nbsp;            throw new Exception(&quot;There is already a part with the id: &quot; + part.getId());</b>
+<i>26</i>&nbsp;        }
+<b class="fc"><i>27</i>&nbsp;        this.storage.put(part.getId(), part);</b>
+<b class="fc"><i>28</i>&nbsp;    }</b>
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /**
+<i>31</i>&nbsp;     * Gets a list of all parts.
+<i>32</i>&nbsp;     * @return a list with all Part objects.
+<i>33</i>&nbsp;     */
+<i>34</i>&nbsp;    public List&lt;Part&gt; readAll() {
+<b class="fc"><i>35</i>&nbsp;        return new ArrayList&lt;&gt;(this.storage.values());</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    public Part readOne(int id) {
+<b class="fc"><i>39</i>&nbsp;        return this.storage.get(id);</b>
+<i>40</i>&nbsp;    }
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    public void update(Part part) throws Exception {
+<b class="nc"><i>43</i>&nbsp;        if (!this.storage.containsKey(part.getId())) {</b>
+<b class="nc"><i>44</i>&nbsp;            throw new Exception(&quot;There is no part with the id: &quot; + part.getId() + &quot; to update.&quot;);</b>
+<i>45</i>&nbsp;        }
+<b class="nc"><i>46</i>&nbsp;        this.storage.put(part.getId(), part);</b>
+<b class="nc"><i>47</i>&nbsp;    }</b>
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    public void delete(int id) throws Exception {
+<b class="nc"><i>50</i>&nbsp;        if (!this.storage.containsKey(id)) {</b>
+<b class="nc"><i>51</i>&nbsp;            throw new Exception(&quot;There is no part with the id: &quot; + id + &quot; to delete.&quot;);</b>
+<i>52</i>&nbsp;        }
+<b class="nc"><i>53</i>&nbsp;        this.storage.remove(id);</b>
+<b class="nc"><i>54</i>&nbsp;    }</b>
+<i>55</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-03-10 19:38</div>
+</div>
+</body>
+</html>
